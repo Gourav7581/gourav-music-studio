@@ -78,7 +78,7 @@ flowchart LR
 The application is split into two independent packages:
 
 ```text
-GouravMusicStudio/
+gourav-music-studio/
 ├── musicstudio/                  # React frontend
 │   ├── public/
 │   └── src/
@@ -141,8 +141,8 @@ Install the following before running the project:
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
-cd GouravMusicStudio
+git clone https://github.com/Gourav7581/gourav-music-studio.git
+cd gourav-music-studio
 ```
 
 ### 2. Configure the backend
