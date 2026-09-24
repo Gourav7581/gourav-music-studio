@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../config/api";
 
 function Admin() {
   const [title, setTitle] = useState("");
@@ -45,8 +45,8 @@ function Admin() {
         formData.append("songs", song);
       });
 
-      const response = await axios.post(
-        "http://localhost:5000/api/create",
+      const response = await api.post(
+        "/api/create",
         formData,
         {
           headers: {

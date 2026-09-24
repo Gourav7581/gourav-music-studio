@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../config/api";
 
 import { usePlayer } from "../context/PlayerContext";
 import AlbumCard from "../components/AlbumCard";
@@ -18,9 +18,7 @@ export default function Home() {
 
   const fetchAlbums = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:5000/api/albums"
-      );
+      const res = await api.get("/api/albums");
 
        const albumsData = res.data.data;
 

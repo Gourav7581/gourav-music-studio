@@ -1,5 +1,9 @@
 const Album = require("../models/Album");
 
+const getBaseUrl = (req) =>
+  process.env.PUBLIC_URL ||
+  `${req.protocol}://${req.get("host")}`;
+
 // ==========================================CREATE ALBUM
 exports.createAlbum = async (req, res) => {
   try {
@@ -50,17 +54,18 @@ exports.createAlbum = async (req, res) => {
 exports.getAlbums = async (req, res) => {
   try {
     const albums = await Album.find();
+    const baseUrl = getBaseUrl(req);
 
     const updatedAlbums = albums.map((album) => ({
       _id: album._id,
       title: album.title,
 
-      poster: `http://localhost:5000/images/${album.poster}`,
+      poster: `${baseUrl}/images/${album.poster}`,
 
       songs: album.songs.map((song) => ({
         _id: song._id,
         title: song.title,
-        file: `http://localhost:5000/songs/${song.file}`,
+        file: `${baseUrl}/songs/${song.file}`,
       })),
 
       createdAt: album.createdAt,
@@ -82,11 +87,12 @@ exports.getAlbums = async (req, res) => {
 exports.getSongs = async (req, res) => {
   try {
     const albums = await Album.find();
+    const baseUrl = getBaseUrl(req);
 
     const songs = albums.flatMap((album) =>
       album.songs.map((song) => ({
         title: song.title,
-        file: `http://localhost:5000/songs/${song.file}`,
+        file: `${baseUrl}/songs/${song.file}`,
       }))
     );
 

@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import axios from "axios";
+import api from "../config/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { usePlayer } from "../context/PlayerContext";
@@ -30,8 +30,8 @@ useEffect(() => {
         try {
             setLoading(true);
 
-            const res = await axios.post(
-                "http://localhost:5000/api/auth/login",
+            const res = await api.post(
+                "/api/auth/login",
                 formData
             );
 

@@ -3,7 +3,7 @@ import React, {
   useState,
 } from "react";
 
-import axios from "axios";
+import api from "../config/api";
 import Select from "react-select";
   import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -38,8 +38,8 @@ export default function CreateYourPlaylist() {
   const fetchSongs = async () => {
     try {
       const res =
-        await axios.get(
-          "http://localhost:5000/api/songs"
+        await api.get(
+          "/api/songs"
         );
 
       const options =
@@ -106,8 +106,8 @@ const handleSubmit = async (e) => {
     );
 
     const res =
-      await axios.post(
-        "http://localhost:5000/api/private/create",
+      await api.post(
+        "/api/private/create",
         formData,
         {
           headers: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../config/api";
 
 import { usePlayer } from "../context/PlayerContext";
 import AlbumCard from "../components/AlbumCard";
@@ -24,8 +24,8 @@ export default function YourPlaylist() {
       const token =
         localStorage.getItem("token");
 
-      const res = await axios.get(
-        "http://localhost:5000/api/private/albums",
+      const res = await api.get(
+        "/api/private/albums",
         {
           headers: {
             Authorization: `Bearer ${token}`,

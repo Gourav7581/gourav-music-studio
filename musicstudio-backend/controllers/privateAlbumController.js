@@ -2,6 +2,10 @@ const PrivateAlbum = require(
   "../models/PrivateAlbum"
 );
 
+const getBaseUrl = (req) =>
+  process.env.PUBLIC_URL ||
+  `${req.protocol}://${req.get("host")}`;
+
 exports.createPrivateAlbum =
   async (req, res) => {
     try {
@@ -70,19 +74,20 @@ exports.createPrivateAlbum =
         await PrivateAlbum.find({
           user: req.user.id,
         });
+      const baseUrl = getBaseUrl(req);
 
       const updatedAlbums =
         albums.map((album) => ({
           _id: album._id,
           title: album.title,
 
-          poster: `http://localhost:5000/images/${album.poster}`,
+          poster: `${baseUrl}/images/${album.poster}`,
 
           songs: album.songs.map(
             (song) => ({
               title: song.title,
 
-              file: `http://localhost:5000/songs/${song.file}`,
+              file: `${baseUrl}/songs/${song.file}`,
             })
           ),
         }));
